@@ -1,0 +1,24 @@
+{
+    "name": "RAXY.Dialogue",
+    "rootNamespace": "RAXY.Dialogue",
+    "references": [
+        "GUID:3f7267155bd17aa4ab523154bc057d7b",
+        "GUID:736f23a4f42e49d429767945c0c5b49e",
+        "GUID:b8478f9a41e9e434db482a2139ded436",
+        "GUID:f06555f75b070af458a003d92f9efb00",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:7e84565b819986141ac5225fd07c153f",
+        "GUID:9e24947de15b9834991c9d8411ea37cf",
+        "GUID:00068975db9e37543a4f737e43bf450b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
