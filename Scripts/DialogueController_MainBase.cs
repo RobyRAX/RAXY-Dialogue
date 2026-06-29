@@ -140,7 +140,7 @@ namespace RAXY.Dialogue
             BlockNext(currentDialogue.blockNextDuration);
             Process_DialogueData_OnStart(currentDialogue);
 
-            speakerNameTmp.text = currentDialogue.speakerName;
+            speakerNameTmp.text = currentDialogue.GetSpeakerName(currentDialogueSO.actors);
             dialogueTyper.StartTyping(currentDialogue.dialogue);
         }
 

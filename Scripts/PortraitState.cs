@@ -126,6 +126,8 @@ namespace RAXY.Dialogue
             }
         }
 
+        public static List<string> CachedPortraitIds => _cachedPortraitIds;
+
         public static void SetPortraitData(List<DialoguePortrait_EditorData> data)
         {
             _cachedPortraitDatas = data;

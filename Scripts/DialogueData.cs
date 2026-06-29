@@ -16,7 +16,9 @@ namespace RAXY.Dialogue
         {
             get
             {
-                if (string.IsNullOrEmpty(speakerName) && string.IsNullOrEmpty(dialogue))
+                string speaker = customSpeaker ? customSpeakerName : speakerId;
+
+                if (string.IsNullOrEmpty(speaker) && string.IsNullOrEmpty(dialogue))
                     return "(Empty)";
 
                 // Limit preview length (for Odin labels, 40–60 chars is good)
@@ -30,15 +32,41 @@ namespace RAXY.Dialogue
                         : dialogue;
                 }
 
-                if (!string.IsNullOrEmpty(speakerName))
-                    return $"{speakerName}: {preview}";
+                if (!string.IsNullOrEmpty(speaker))
+                    return $"{speaker}: {preview}";
                 else
                     return preview;
             }
         }
 
-        public string speakerName;
+        [TitleGroup("Speaker")]
+        [LabelText("Custom")]
+        public bool customSpeaker;
+
+        [TitleGroup("Speaker")]
+        [HideIf("@customSpeaker")]
+        [ValueDropdown("SpeakerIds")]
+        public string speakerId;
+
+        [TitleGroup("Speaker")]
+        [ShowIf("@customSpeaker")]
+        public string customSpeakerName;
+
+        [TitleGroup("Dialogue Content")]
         public string dialogue;
+
+#if UNITY_EDITOR
+        static IEnumerable<string> SpeakerIds => PortraitState.CachedPortraitIds;
+#endif
+
+        public string GetSpeakerName(List<DialogueActorSO> actors)
+        {
+            if (customSpeaker)
+                return customSpeakerName;
+
+            var actor = actors?.Find(a => a.actorId == speakerId);
+            return actor != null ? actor.ActorName : speakerId;
+        }
 
         [TitleGroup("Dialogue Setting")]
         [SuffixLabel("seconds")]
