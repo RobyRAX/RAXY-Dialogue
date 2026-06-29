@@ -35,15 +35,15 @@ namespace RAXY.Dialogue
         [PropertyRange(0, 1)]
         public float opacity;
 
-        // --- Face section ---
-        [BoxGroup("PortraitOptions_1/Face")]
+        // --- Swappable section ---
+        [BoxGroup("PortraitOptions_1/Swappable")]
         [ToggleLeft]
-        public bool setFace;
+        public bool setSwappable;
 
-        [BoxGroup("PortraitOptions_1/Face")]
-        [ShowIf("@setFace")]
-        [ValueDropdown("SelectedFaceIds")]
-        public string faceId;
+        [BoxGroup("PortraitOptions_1/Swappable")]
+        [ShowIf("@setSwappable")]
+        [ValueDropdown("SelectedSwappableIds")]
+        public string swappableId;
 
         // --- Portrait position section
         [BoxGroup("PortraitOptions_1/Position")]
@@ -107,7 +107,7 @@ namespace RAXY.Dialogue
 
         static List<DialoguePortrait_EditorData> _cachedPortraitDatas;
         static List<string> _cachedPortraitIds;
-        List<string> SelectedFaceIds
+        List<string> SelectedSwappableIds
         {
             get
             {
@@ -117,9 +117,9 @@ namespace RAXY.Dialogue
                 if (selectedData == null)
                     return newList;
 
-                foreach (var face in selectedData.faceIds)
+                foreach (var swappable in selectedData.swappableIds)
                 {
-                    newList.Add(face);
+                    newList.Add(swappable);
                 }
 
                 return newList;

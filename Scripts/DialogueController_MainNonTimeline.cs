@@ -103,8 +103,8 @@ namespace RAXY.Dialogue
                 if (selectedPortState == null)
                     continue;
 
-                if (selectedPortState.setFace)
-                    portrait.SetFaceSprite(selectedPortState.faceId);
+                if (selectedPortState.setSwappable)
+                    portrait.SetSwappableSprite(selectedPortState.swappableId);
 
                 if (selectedPortState.setOpacity)
                 {

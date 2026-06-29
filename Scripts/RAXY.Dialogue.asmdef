@@ -10,7 +10,8 @@
         "UniTask",
         "Unity.Addressables",
         "RAXY.UI",
-        "DOTween.Modules"
+        "DOTween.Modules",
+        "RAXY.Core"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -106,13 +106,15 @@ namespace RAXY.Dialogue
                 if (!Application.isPlaying)
                 {
                     // Editor mode — keep prefab connection
-                    newPortraitObj = PrefabUtility.InstantiatePrefab(actorSO.dialoguePortrait, portraitParent) as GameObject;
+                    newPortraitObj = PrefabUtility.InstantiatePrefab(
+                                        actorSO.dialoguePortraitProvider.Asset, 
+                                        portraitParent) as GameObject;
                 }
                 else
 #endif
                 {
                     // Runtime — normal instantiate
-                    newPortraitObj = Instantiate(actorSO.dialoguePortrait, portraitParent);
+                    newPortraitObj = Instantiate(actorSO.dialoguePortraitProvider.Asset, portraitParent);
                 }
 
                 var portraitComp = newPortraitObj.GetComponent<DialoguePortrait>();

@@ -9,36 +9,34 @@ namespace RAXY.Dialogue
 {
     public class DialoguePortrait : MonoBehaviour
     {
-        public string portraitId;
-
         public int PortraitRuntimeIndex { get; set; }
 
         [TitleGroup("UI")]
-        public RectTransform rootRT;
+        public RectTransform pivot;
         [TitleGroup("UI")]
         public CanvasGroup mainCG;
         [TitleGroup("UI")]
         public CanvasGroup charColorCG;
         [TitleGroup("UI")]
-        public Image charFaceImg;
+        public List<Image> swappableImgs;
 
-        [TitleGroup("Face")]
+        [TitleGroup("Swappable")]
         [TableList]
         [SerializeField]
-        List<FaceEntry> faces;
-        public Dictionary<string, FaceEntry> FaceDict;
+        List<SwappableEntry> swappables;
+        public Dictionary<string, SwappableEntry> SwappableDict;
 
 #if UNITY_EDITOR
-        public List<FaceEntry> Faces => faces;
+        public List<SwappableEntry> Swappables => swappables;
 #endif
 
         void InitFaceDict()
         {
-            FaceDict = new();
+            SwappableDict = new();
 
-            foreach (var face in faces)
+            foreach (var face in swappables)
             {
-                FaceDict.Add(face.faceId, face);
+                SwappableDict.Add(face.swappableId, face);
             }
         }
 
@@ -57,35 +55,27 @@ namespace RAXY.Dialogue
 
         [TitleGroup("Debug Function")]
         [Button]
-        public void SetFaceSprite(string faceId)
+        public void SetSwappableSprite(string swappableId)
         {
-            if (FaceDict != null && FaceDict.TryGetValue(faceId, out FaceEntry face))
+            if (SwappableDict != null && SwappableDict.TryGetValue(swappableId, out SwappableEntry swappable))
             {
-                charFaceImg.sprite = face.faceSprite;
+                foreach (var img in swappableImgs)
+                {
+                    img.sprite = swappable.swappableSprite;
+                }
             }
             else
             {
-                var faceAlt = faces.Find(x => x.faceId == faceId);
-                if (faceAlt != null)
+                var swappableAlt = swappables.Find(x => x.swappableId == swappableId);
+                if (swappableAlt != null)
                 {
-                    charFaceImg.sprite = faceAlt.faceSprite;
+                    foreach (var img in swappableImgs)
+                    {
+                        img.sprite = swappableAlt.swappableSprite;
+                    }
                 }
             }
         }
-
-        // [HorizontalGroup("Debug Function/Op")]
-        // [Button]
-        // public void Dim()
-        // {
-        //     charColorCG.alpha = 0.33f;
-        // }
-
-        // [HorizontalGroup("Debug Function/Op")]
-        // [Button]
-        // public void Highlight()
-        // {
-        //     charColorCG.alpha = 1;
-        // }
 
         /// <summary>
         ///
@@ -164,10 +154,10 @@ namespace RAXY.Dialogue
     }
 
     [Serializable]
-    public class FaceEntry
+    public class SwappableEntry
     {
-        public string faceId;
-        public Sprite faceSprite;
+        public string swappableId;
+        public Sprite swappableSprite;
     }
 
 #if UNITY_EDITOR
@@ -175,19 +165,9 @@ namespace RAXY.Dialogue
     public class DialoguePortrait_EditorData
     {
         public string portraitId;
-        public List<string> faceIds;
+        public List<string> swappableIds;
 
         public DialoguePortrait_EditorData() { }
-        public DialoguePortrait_EditorData(DialoguePortrait portrait)
-        {
-            portraitId = portrait.portraitId;
-            faceIds = new();
-
-            foreach (var face in portrait.Faces)
-            {
-                faceIds.Add(face.faceId);
-            }
-        }
     }
 #endif
 }
