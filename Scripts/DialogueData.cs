@@ -82,9 +82,11 @@ namespace RAXY.Dialogue
         public List<PortraitState> portraitsOnStart;
 
         [TitleGroup("On Start")]
+        [HideReferenceObjectPicker]
         public List<DialogueActionEntry> actionsOnStart;
 
         [TitleGroup("On Complete")]
+        [HideReferenceObjectPicker]
         public List<DialogueActionEntry> actionsOnComplete;
     }
 
@@ -94,6 +96,7 @@ namespace RAXY.Dialogue
         public string setId;
 
         [ListDrawerSettings(ShowIndexLabels = true, ListElementLabelName = "Label")]
+        [HideReferenceObjectPicker]
         public List<DialogueData> dialogueDatas;
 
 #if UNITY_EDITOR
@@ -116,6 +119,7 @@ namespace RAXY.Dialogue
         public List<PortraitState> portraitsOnComplete;
 
         [TitleGroup("On Complete")]
+        [HideReferenceObjectPicker]
         public List<DialogueActionEntry> actionsOnComplete;      
 
         [TitleGroup("Status")]

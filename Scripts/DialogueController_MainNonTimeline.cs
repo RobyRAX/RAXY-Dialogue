@@ -28,7 +28,7 @@ namespace RAXY.Dialogue
 
         public override DialogueType DialogueType => DialogueType.NonTimelineDialogue;
 
-        protected override void PrepareDialogueSO(DialogueSO dialogueSO)
+        public override void PrepareDialogueSO(DialogueSO dialogueSO)
         {
             base.PrepareDialogueSO(dialogueSO);
 

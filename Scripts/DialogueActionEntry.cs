@@ -15,22 +15,27 @@ namespace RAXY.Dialogue
         [ShowIf("@actionType == DialogueActionType.HideDialogueBar")]
         [HideLabel]
         [FormerlySerializedAs("hideDialgue_Param")]
+        [HideReferenceObjectPicker]
         public HideDialogueBar_ActionParam hideDialogue_Param;
 
         [ShowIf("@actionType == DialogueActionType.PlayTimeline")]
         [HideLabel]
+        [HideReferenceObjectPicker]
         public PlayTimeline_ActionParam playTimeline_Param;
 
         [ShowIf("@actionType == DialogueActionType.RaiseEvent")]
         [HideLabel]
+        [HideReferenceObjectPicker]
         public RaiseEvent_ActionParam raiseEvent_Param;
 
         [ShowIf("@actionType == DialogueActionType.ShowOptions")]
         [HideLabel]
+        [HideReferenceObjectPicker]
         public ShowOptions_ActionParam showOptions_Param;
 
         [ShowIf("@actionType == DialogueActionType.PlayDialogueSet")]
         [HideLabel]
+        [HideReferenceObjectPicker]
         public PlayDialogueSet_ActionParam playDialogueSet_Param;
     }
 

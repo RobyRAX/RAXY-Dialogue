@@ -9,19 +9,6 @@ namespace RAXY.Dialogue
 {
     public class DialogueManager : Singleton<DialogueManager>//, IBridgeable//ISepObject, IBridgeable
     {
-        // #region ISepObject
-        // public GameObject GetGameObject => gameObject;
-        //public bool FirstInitDone { get; set; }
-        // public int Order { get; set; }
-        // public string SepGroup { get; set; }
-
-        // public async UniTask Init()
-        // {
-        //     InitDialogueControllerDict();
-        //     FirstInitDone = true;
-        // }
-        // #endregion
-
         protected override void Awake()
         {
             base.Awake();
@@ -45,10 +32,58 @@ namespace RAXY.Dialogue
         [Button]
         public void PlayDialogueSO(DialogueSO dialogueSO)
         {
+            if (dialogueSO == null)
+                return;
+
             if (DialogueControllerDict.TryGetValue(dialogueSO.dialogueType, out DialogueControllerBase dialogueCont))
             {
                 dialogueCont.gameObject.SetActive(true);
                 dialogueCont.PlayDialogueSO(dialogueSO);
+            }
+        }
+
+        [Button]
+        public void PrepareDialogueSO(DialogueSO dialogueSO)
+        {
+            if (dialogueSO == null)
+                return;
+
+            if (DialogueControllerDict.TryGetValue(dialogueSO.dialogueType, out DialogueControllerBase dialogueCont))
+            {
+                dialogueCont.gameObject.SetActive(true);
+                dialogueCont.PrepareDialogueSO(dialogueSO);
+            }
+        }
+
+        public void PlayDialogueSet(int index)
+        {
+            foreach (var dialogueCont in DialogueControllerDict.Values)
+            {
+                if (dialogueCont.currentDialogueSO != null)
+                    dialogueCont.PlayDialogueSet(index);
+            }
+        }
+
+        public void PlayDialogueSet(string id)
+        {
+            foreach (var dialogueCont in DialogueControllerDict.Values)
+            {
+                if (dialogueCont.currentDialogueSO != null)
+                    dialogueCont.PlayDialogueSet(id);
+            }
+        }
+
+        public void HideDialogue(bool instant = true)
+        {
+            foreach (var dialogueCont in dialogueControllers)
+            {
+                if (dialogueCont is DialogueController_MainBase mainDialogue)
+                {
+                    if (instant)
+                        mainDialogue.HideDialogueBar_Instant();
+                    else
+                        mainDialogue.HideDialogueBar();
+                }
             }
         }
     }

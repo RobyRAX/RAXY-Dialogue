@@ -38,7 +38,7 @@ namespace RAXY.Dialogue
 
         [TitleGroup("Debug Function")]
         [Button]
-        protected virtual void PrepareDialogueSO(DialogueSO dialogueSO)
+        public virtual void PrepareDialogueSO(DialogueSO dialogueSO)
         {
             currentDialogueSO = dialogueSO;
         }

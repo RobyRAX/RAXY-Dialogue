@@ -66,17 +66,24 @@ namespace RAXY.Dialogue
             nextBtn.onClick.AddListener(NextDialogueData);
         }
 
-        protected override void PrepareDialogueSO(DialogueSO dialogueSO)
+        public override void PrepareDialogueSO(DialogueSO dialogueSO)
         {
             base.PrepareDialogueSO(dialogueSO);
 
             SpawnDialoguePortraits();
+            ApplyPortraitData(currentDialogueSO.portraitsOnStart);
         }
 
         protected void SpawnDialoguePortraits()
         {
             // Clear dictionary
             PortraitDict = new();
+
+            if (currentDialogueSO == null || currentDialogueSO.actors == null)
+                return;
+
+            if (portraitParent == null)
+                return;
 
             // --- Destroy previous portraits safely ---
             var toDestroy = new List<GameObject>();
@@ -100,6 +107,12 @@ namespace RAXY.Dialogue
             // --- Spawn new portraits ---
             foreach (var actorSO in currentDialogueSO.actors)
             {
+                if (actorSO == null)
+                    continue;
+
+                if (actorSO.dialoguePortraitProvider == null || actorSO.dialoguePortraitProvider.Asset == null)
+                    continue;
+
                 GameObject newPortraitObj;
 
 #if UNITY_EDITOR
@@ -117,7 +130,13 @@ namespace RAXY.Dialogue
                     newPortraitObj = Instantiate(actorSO.dialoguePortraitProvider.Asset, portraitParent);
                 }
 
+                if (newPortraitObj == null)
+                    continue;
+
                 var portraitComp = newPortraitObj.GetComponent<DialoguePortrait>();
+                if (portraitComp == null)
+                    continue;
+
                 portraitComp.PortraitRuntimeIndex = index;
                 PortraitDict.Add(actorSO.actorId, portraitComp);
                 index++;
@@ -202,7 +221,6 @@ namespace RAXY.Dialogue
             gameObject.SetActive(true);
 
             PrepareDialogueSO(dialogueSO);
-            ApplyPortraitData(currentDialogueSO.portraitsOnStart);
             ResetUI();
             HideDialogueBar_Instant();
 

@@ -122,7 +122,7 @@ namespace RAXY.Dialogue
             Debug.Log($"Bound {PortraitDict.Count} portraits to timeline tracks.");
         }
 
-        protected override void PrepareDialogueSO(DialogueSO dialogueSO)
+        public override void PrepareDialogueSO(DialogueSO dialogueSO)
         {
             base.PrepareDialogueSO(dialogueSO);
 
