@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 //using RAXY.Core;
@@ -9,6 +10,11 @@ namespace RAXY.Dialogue
 {
     public class DialogueManager : Singleton<DialogueManager>//, IBridgeable//ISepObject, IBridgeable
     {
+        public event Action OnDialogueStarted;
+        public event Action OnDialogueEnded;
+
+        public void RaiseDialogueStarted() => OnDialogueStarted?.Invoke();
+        public void RaiseDialogueEnded() => OnDialogueEnded?.Invoke();
         protected override void Awake()
         {
             base.Awake();

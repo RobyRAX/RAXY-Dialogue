@@ -26,12 +26,6 @@ namespace RAXY.Dialogue
         [SerializeField] protected float playDialogueFadeInTime = 0.33f;
 
         [TitleGroup("Events")]
-        [SerializeField] protected EventSO startDialogueEvent;
-
-        [TitleGroup("Events")]
-        [SerializeField] protected EventSO endDialogueEvent;
-
-        [TitleGroup("Events")]
         [SerializeField] protected StringEventSO selectOptionEvent;
 
         [TitleGroup("Prefab")]
@@ -229,7 +223,7 @@ namespace RAXY.Dialogue
                 dialogueDataSet.Reset();
             }
 
-            startDialogueEvent?.Raise();
+            DialogueManager.Instance?.RaiseDialogueStarted();
         }
 
         public override void CompleteDialogueSO()
@@ -237,7 +231,7 @@ namespace RAXY.Dialogue
             dialogueParentCG.DOFade(0, 0.2f).OnComplete(() =>
             {
                 gameObject.SetActive(false);
-                endDialogueEvent?.Raise();
+                DialogueManager.Instance?.RaiseDialogueEnded();
             });
         }
 
