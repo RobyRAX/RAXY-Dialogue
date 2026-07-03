@@ -174,6 +174,16 @@ namespace RAXY.Dialogue
             blockNextCoroutine = null; // clear reference when done
         }
 
+        protected void StopBlockNextCoroutine()
+        {
+            isBlockingNext = false;
+            if (blockNextCoroutine == null)
+                return;
+
+            StopCoroutine(blockNextCoroutine);
+            blockNextCoroutine = null;
+        }
+
         [HorizontalGroup("Debug Function/OP")]
         [Button]
         public void NextDialogueData()

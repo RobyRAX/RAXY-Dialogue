@@ -92,6 +92,15 @@ namespace RAXY.Dialogue
                 }
             }
         }
+
+        public void ResetNonTimelineDialogueForReplay()
+        {
+            if (!DialogueControllerDict.TryGetValue(DialogueType.NonTimelineDialogue, out DialogueControllerBase cont))
+                return;
+
+            if (cont is DialogueController_MainNonTimeline nonTimeline)
+                nonTimeline.ResetForReplay();
+        }
     }
 
     public enum DialogueType

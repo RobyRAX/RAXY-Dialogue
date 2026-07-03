@@ -31,8 +31,23 @@ namespace RAXY.Dialogue
         public override void PrepareDialogueSO(DialogueSO dialogueSO)
         {
             base.PrepareDialogueSO(dialogueSO);
-
+            ResetForReplay();
             SetPortraitsPosition(currentDialogueSO.portraitsOnStart);
+        }
+
+        public void ResetForReplay()
+        {
+            dialogueParentCG.DOKill();
+            dialogueParentCG.alpha = 1f;
+            dialogueBarCG.DOKill();
+            dialogueBarCG.alpha = 0f;
+            StopBlockNextCoroutine();
+
+            if (currentDialogueSO?.dialogueDataSets == null)
+                return;
+
+            foreach (var set in currentDialogueSO.dialogueDataSets)
+                set.Reset();
         }
 
         void SetPortraitsPosition(List<PortraitState> states)
