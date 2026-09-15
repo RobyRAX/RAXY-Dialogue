@@ -1,5 +1,7 @@
 # RAXY Dialogue System
 
+> **DEPRECATED:** This package is replaced by [RAXY Narrative](https://github.com/RobyRAX/RAXY-Narrative). Prefer the replacement for new projects.
+
 RAXY Dialogue System provides a modular dialogue foundation for Unity projects: dialogue data, controllers, timeline integration, portraits, and options.
 
 ## Features
